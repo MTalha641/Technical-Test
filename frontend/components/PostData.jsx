@@ -17,7 +17,7 @@ function PostData() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         
-        // If the field is "operating_hours", store it as JSON
+     
         if (name === "operating_hours") {
             try {
                 setFormData({ ...formData, [name]: JSON.stringify(JSON.parse(value)) });

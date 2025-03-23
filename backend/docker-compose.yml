@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   postgres:
     container_name: ghost_kitchen_db
@@ -11,19 +12,5 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-#   postgres_test:
-#     container_name: ghost_kitchen_test_db
-#     image: postgres:latest
-#     restart: always
-#     env_file:
-#       - .env
-#     ports:
-#       - "5433:5432"
-#     volumes:
-#       - pg_test_data:/var/lib/postgresql/data
-
-# volumes:
-#   pg_data:
-#     driver: local
-#   pg_test_data:
-#     driver: local
+volumes:
+  pg_data:  
