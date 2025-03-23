@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+.env
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+venv/
+requirements.txt
+
+# General
+.DS_Store
+*.log
