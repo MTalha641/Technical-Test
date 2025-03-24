@@ -4,7 +4,7 @@ The folder structure is divided into frontend and backend folders. Env files for
 ## Clone the Repository
 ```sh
 git clone https://github.com/MTalha641/Technical-Test.git
-cd Technical-Test
+
 ```
 
 ## Database Setup
@@ -73,8 +73,6 @@ docker-compose up -d
 1. Navigate to the `etl` folder inside the `backend` directory:
    ```sh
    cd /backend/etl
-   ```
-
    ```
 2. Install dependencies:
    ```sh
