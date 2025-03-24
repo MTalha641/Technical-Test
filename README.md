@@ -109,14 +109,14 @@ AND created_at BETWEEN '2024-01-01 00:00:00' AND '2024-12-31 23:59:59';
 
 #### **1. Composite Index (Improves Query Performance on Commonly Filtered Columns)**
 ```sql
-CREATE INDEX idx_location_created_at
+CREATE INDEX idx_created_at
 ON location_brand_platforms (location_id, created_at);
 ```
 - Helps speed up queries filtering by both `location_id` and `created_at`.
 
 #### **2. Partial Index (Optimizing Frequent Conditions like Active Status)**
 ```sql
-CREATE INDEX idx_active_records
+CREATE INDEX idx_status
 ON location_brand_platforms (location_id, created_at)
 WHERE status = 'active';
 ```
@@ -124,17 +124,15 @@ WHERE status = 'active';
 
 #### **3. Partitioning (For Large Datasets)**
 ```sql
-CREATE TABLE location_brand_platforms_2024
 PARTITION OF location_brand_platforms
-FOR VALUES FROM ('2024-01-01') TO ('2024-12-31');
+FOR VALUES FROM ('2025-01-01') TO ('2025-01-31');
 ```
-- Splits large tables into smaller partitions for efficient querying.
+- Splits large tables into smaller partitions for efficient querying (could be used in the location_brand_platforms table).
 
 ### **Trade-offs & Considerations**
-- **Indexes increase storage** and can slow down `INSERT`/`UPDATE` operations.
 - **Partial indexes** reduce query time but only help if the condition (`status = 'active'`) is frequently used.
 - **Partitioning adds complexity** and should only be used for massive datasets (millions of rows).
-- **Too many indexes** can slow down write operations, so indexing should be carefully planned.
+- **Too many indexes** can slow down write operations, so indexing should be carefully planned and only applied on frequent operations.(we can analyze most used columns by checking the no of calls and execution time)
 
 ---
 
