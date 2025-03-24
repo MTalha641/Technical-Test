@@ -13,18 +13,6 @@ Navigate to the `backend` folder and run the following command to start the Post
 cd backend
 docker-compose up -d
 ```
-
-## Running Database Migrations
-1. Navigate to the `migrations` folder inside the `backend` directory:
-   ```sh
-   cd migrations
-   ```
-2. Run the migration scripts:
-   ```sh
-   node 001_create_tables.js
-   node 002_seed_data.js
-   ```
-
 ## Backend Setup
 1. Navigate to the backend directory:
    ```sh
@@ -43,12 +31,22 @@ docker-compose up -d
    POSTGRES_PORT=5432
    DATA_URL=https://simplemaps.com/static/data/world-cities/basic/simplemaps_worldcities_basicv1.75.zip
    JWT_SECRET=talha
-   ```
+
 4. Start the backend server:
    ```sh
    npm start
    ```
-  
+   ```
+## Running Database Migrations
+1. Navigate to the `migrations` folder inside the `backend` directory:
+   ```sh
+   cd migrations
+   ```
+2. Run the migration scripts:
+   ```sh
+   node 001_create_tables.js
+   node 002_seed_data.js
+   ```
 
 ## Frontend Setup
 1. Navigate to the frontend directory:

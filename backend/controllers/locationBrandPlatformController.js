@@ -111,7 +111,6 @@ export const addLocationBrandPlatform = async (req, res) => {
             return res.status(400).json({ error: "Duplicate entry found" });
         }
 
-        // Insert new record
         const result = await pool.query(
             `INSERT INTO location_brand_platforms 
             (id, location_id, brand_id, platform_id, operating_hours, status, commission_rate) 
