@@ -19,6 +19,7 @@ DB_HOST = os.getenv("POSTGRES_HOST")
 DB_PORT = os.getenv("POSTGRES_PORT")
 DATA_URL = os.getenv("DATA_URL")
 
+# the etl file maps country name to country and city to city in the locations table
 def extract_data():
     logging.info("Downloading dataset from the link")
 

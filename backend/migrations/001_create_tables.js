@@ -39,9 +39,9 @@ async function runMigration() {
   const client = await pool.connect();
   try {
     await client.query(migrationQuery);
-    console.log("✅ Migration applied successfully!");
+    console.log("Migration applied successfully");
   } catch (err) {
-    console.error("❌ Migration failed:", err);
+    console.error("Migration failed:", err);
   } finally {
     client.release();
     await pool.end();

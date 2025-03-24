@@ -1,21 +1,12 @@
 # Technical Test
 
-The folder structure is divided into `frontend` and `backend` folders. Env files for frontend and backend are provided below. Copy them into your respective `frontend` and `backend` folders for simplicity. Use the same username and password given in the backend `.env` file to submit a `POST` request.
+The folder structure is divided into `frontend` and `backend` folders. Env files for frontend and backend are provided below. Copy the same files into your respective `frontend` and `backend` folders for simplicity. Use the same username and password given in the backend `.env` file to submit a `POST` request.
 
 ---
 
 ## Clone the Repository
 ```sh
 git clone https://github.com/MTalha641/Technical-Test.git
-```
-
----
-
-## Database Setup
-Navigate to the `backend` folder and run the following command to start the PostgreSQL database using Docker:
-```sh
-cd backend
-docker-compose up -d
 ```
 
 ---
@@ -45,6 +36,16 @@ docker-compose up -d
    ```
 
 ---
+
+## Database Setup
+Navigate to the `backend` folder and run the following command to start the PostgreSQL database using Docker:
+```sh
+cd backend
+docker-compose up -d
+```
+
+---
+
 
 ## Running Database Migrations
 1. Navigate to the `migrations` folder inside the `backend` directory:
