@@ -1,11 +1,15 @@
 # Technical Test
-The folder structure is divided into frontend and backend folders. Env files for frontend and backend are provided below, copy them in your respective frontend and backend folders for simplicity purposes. Use the  same username and password given in the backend env file to submit a POST request.
+
+The folder structure is divided into `frontend` and `backend` folders. Env files for frontend and backend are provided below. Copy them into your respective `frontend` and `backend` folders for simplicity. Use the same username and password given in the backend `.env` file to submit a `POST` request.
+
+---
 
 ## Clone the Repository
 ```sh
 git clone https://github.com/MTalha641/Technical-Test.git
-
 ```
+
+---
 
 ## Database Setup
 Navigate to the `backend` folder and run the following command to start the PostgreSQL database using Docker:
@@ -13,6 +17,9 @@ Navigate to the `backend` folder and run the following command to start the Post
 cd backend
 docker-compose up -d
 ```
+
+---
+
 ## Backend Setup
 1. Navigate to the backend directory:
    ```sh
@@ -23,7 +30,7 @@ docker-compose up -d
    npm install
    ```
 3. Create a `.env` file in the `backend/` directory and add the following:
-   ```
+   ```sh
    POSTGRES_USER=admin
    POSTGRES_PASSWORD=admin123
    POSTGRES_DB=ghost_kitchen
@@ -31,12 +38,14 @@ docker-compose up -d
    POSTGRES_PORT=5432
    DATA_URL=https://simplemaps.com/static/data/world-cities/basic/simplemaps_worldcities_basicv1.75.zip
    JWT_SECRET=talha
-
+   ```
 4. Start the backend server:
    ```sh
    npm start
    ```
-   ```
+
+---
+
 ## Running Database Migrations
 1. Navigate to the `migrations` folder inside the `backend` directory:
    ```sh
@@ -48,6 +57,8 @@ docker-compose up -d
    node 002_seed_data.js
    ```
 
+---
+
 ## Frontend Setup
 1. Navigate to the frontend directory:
    ```sh
@@ -58,19 +69,20 @@ docker-compose up -d
    npm install
    ```
 3. Create a `.env` file in the `frontend/` directory and add the following:
-   ```
+   ```sh
    VITE_API_BASE_URL=http://localhost:5000/api
    ```
 4. Start the frontend application:
    ```sh
    npm run dev
    ```
-   
+
+---
 
 ## Running the ETL Script
 1. Navigate to the `etl` folder inside the `backend` directory:
    ```sh
-   cd /backend/etl
+   cd backend/etl
    ```
 2. Install dependencies:
    ```sh
@@ -81,7 +93,51 @@ docker-compose up -d
    python etl.py
    ```
 
+---
+
+## Quick Query Optimization
+
+### **Query for Counting Entries by Location and Date Range**
+```sql
+SELECT COUNT(*)
+FROM location_brand_platforms
+WHERE location_id = '123'
+AND created_at BETWEEN '2024-01-01 00:00:00' AND '2024-12-31 23:59:59';
+```
+
+### **Indexing and Optimization Strategies for Large Datasets**
+
+#### **1. Composite Index (Improves Query Performance on Commonly Filtered Columns)**
+```sql
+CREATE INDEX idx_location_created_at
+ON location_brand_platforms (location_id, created_at);
+```
+- Helps speed up queries filtering by both `location_id` and `created_at`.
+
+#### **2. Partial Index (Optimizing Frequent Conditions like Active Status)**
+```sql
+CREATE INDEX idx_active_records
+ON location_brand_platforms (location_id, created_at)
+WHERE status = 'active';
+```
+- Useful if most queries filter only `active` records, reducing index size and query time.
+
+#### **3. Partitioning (For Large Datasets)**
+```sql
+CREATE TABLE location_brand_platforms_2024
+PARTITION OF location_brand_platforms
+FOR VALUES FROM ('2024-01-01') TO ('2024-12-31');
+```
+- Splits large tables into smaller partitions for efficient querying.
+
+### **Trade-offs & Considerations**
+- **Indexes increase storage** and can slow down `INSERT`/`UPDATE` operations.
+- **Partial indexes** reduce query time but only help if the condition (`status = 'active'`) is frequently used.
+- **Partitioning adds complexity** and should only be used for massive datasets (millions of rows).
+- **Too many indexes** can slow down write operations, so indexing should be carefully planned.
+
+---
+
 ## Notes
 - Ensure **Docker Desktop is running** before using `docker-compose`.
-
 
